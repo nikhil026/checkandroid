@@ -1,8 +1,6 @@
-var Scholarship=require('./../scholarship');
 var express = require('express');
 var mongoose=require('mongoose');
 var router = express.Router();
-var connection=require('./../app');
 
 
 router.post('/',function(req,res){

@@ -1,4 +1,4 @@
-var Blog=require('./../blog');
+
 var express = require('express');
 var router = express.Router();
 
