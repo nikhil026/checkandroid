@@ -9,8 +9,9 @@ var influencerSchema = mongoose.Schema({
     expertise:String,
     tags:[{field:String}],
     scholarship:[{scholarship_id:mongoose.Schema.Types.ObjectId}],
+    blogs:[{_id:mongoose.Schema.Types.ObjectId}],
     courses:[{course:mongoose.Schema.Types.ObjectId}]
 
 });
 
-module.exports=mongoose.model('Influencer', influencerSchema);
+module.exports=mongoose.model('Influencer', influencerSchema,'Influencers');

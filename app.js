@@ -31,7 +31,6 @@ var login=require('./routes/login');
 
 
 
-
 app.use('/', index);
 app.use('/blog',blog);
 app.use('/scholarship',scholarship);

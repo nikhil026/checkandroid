@@ -1,8 +1,8 @@
 var mongoose=require('mongoose');
 
-var imagesSchema = mongoose.Schema({
+var imageSchema = mongoose.Schema({
     profile_image:{data:Buffer,contentType:String},
     uploader_id:mongoose.Schema.Types.ObjectId
 });
 
-module.exports=mongoose.model('Images', imagesSchema);
+module.exports=mongoose.model('Image', imageSchema,'Images');

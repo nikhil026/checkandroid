@@ -17,4 +17,4 @@ var scholarshipSchema = mongoose.Schema({
     influencer_id:mongoose.Schema.Types.ObjectId
 });
 
-module.exports=mongoose.model('Scholarship', scholarshipSchema);
+module.exports=mongoose.model('Scholarship', scholarshipSchema,'Scholarships');
