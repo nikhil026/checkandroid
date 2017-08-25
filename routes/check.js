@@ -3,7 +3,7 @@ var auth = new GoogleAuth;
 var mongoose=require('mongoose');
 var express = require('express');
 var router = express.Router();
-var connection=mongoose.connect('mongodb://localhost/loginsystem');
+
 
 var Student=require('./../models/student');
 
@@ -26,7 +26,6 @@ router.post('/',function(req,res){
             {
                 if(err){
                     console.log(err)
-
                 }
                 if(data){
 
@@ -40,16 +39,16 @@ router.post('/',function(req,res){
         });
 
 
-   //dummy email check nikhil051097@gmail.com
+    //dummy email check nikhil051097@gmail.com
 
-
+    //
     // var student=new Student({"email":"nikhil051097@gmail.com"});
     // student.save(function(err,data){
     //     if(err) console.log(err);
     //     if(data) console.log(data);
-    // })
+    })
 
 
-});
+
 
 module.exports = router;

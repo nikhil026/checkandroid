@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var GoogleAuth = require('google-auth-library');
 var auth = new GoogleAuth;
 var mongoose=require('mongoose');
-
+var connection=mongoose.connect('mongodb://localhost/loginsystem');
 var app = express();
 
 
@@ -27,6 +27,8 @@ var index = require('./routes/index');
 var scholarship= require('./routes/scholarship');
 var blog=require('./routes/blog');
 var login=require('./routes/login');
+var check=require('./routes/check');
+var signup=require('./routes/signup');
 
 
 
@@ -35,6 +37,8 @@ app.use('/', index);
 app.use('/blog',blog);
 app.use('/scholarship',scholarship);
 app.use('/login',login);
+app.use('/signup',signup);
+app.use('/check',check);
 
 
 module.exports = app;
