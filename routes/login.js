@@ -12,31 +12,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/',function(req,res){
-    var CLIENT_ID="587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
-    var token=req.body.token;
-    var client = new auth.OAuth2(CLIENT_ID, '', '');
-    client.verifyIdToken(
-        token,
-        CLIENT_ID,
-        function(e, login) {
-            var payload = login.getPayload();
-            var userid = payload['sub'];
-            console.log(JSON.stringify(payload, undefined, 2));
-            Student.find({"email":payload.email},function(err,data)
-            {
-                if(err){
-                    console.log(err)
+   var email=req.body.email;
+   var password=req.body.password;
+    var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
 
-                }
-                if(data){
-
-                    if(data.length>0)
-                        res.send('true');
-                    else
-                        res.send('false')
-                }
-            });
-
+    Student.find(query,function(err,data){
+        if(err){console.log(err)}
+        else {console.log(data)
+        res.send(data)}
+    });
         });
 
 
@@ -50,6 +34,6 @@ router.post('/',function(req,res){
     // })
 
 
-});
+
 
 module.exports = router;
