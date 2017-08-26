@@ -33,6 +33,7 @@ var signup=require('./routes/signup');
 
 
 
+
 app.use('/', index);
 app.use('/blog',blog);
 app.use('/scholarship',scholarship);

@@ -6,12 +6,13 @@ var router = express.Router();
 
 
 var Student=require('./../models/student');
+var Influencer=require('./../models/influencer');
 
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.post('/',function(req,res) {
+router.post('/student',function(req,res) {
     var obj = {
         email: req.body.email,
         password: req.body.password
@@ -21,6 +22,20 @@ router.post('/',function(req,res) {
         if(err){ console.log(err);}
         if(data){ console.log(data);
         res.send(data);}
+    });
+
+});
+
+router.post('/influencer',function(req,res) {
+    var obj = {
+        email: req.body.email,
+        password: req.body.password
+    };
+    var influencer=new Influencer(obj);
+    influencer.save(function(err,data){
+        if(err){ console.log(err);}
+        if(data){ console.log(data);
+            res.send(data);}
     });
 
 });
