@@ -1,4 +1,5 @@
 var mongoose=require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
 
 var influencerSchema = mongoose.Schema({
     first_name:String,
@@ -14,4 +15,5 @@ var influencerSchema = mongoose.Schema({
 
 });
 
+influencerSchema.plugin(findOrCreate);
 module.exports=mongoose.model('Influencer', influencerSchema,'Influencers');

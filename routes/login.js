@@ -17,7 +17,7 @@ router.post('/student',function(req,res){
    var password=req.body.password;
     var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
 
-    Student.find(query,function(err,data){
+    Student.findOne(query,function(err,data){
         if(err){console.log(err)}
         else {console.log(data)
         res.send(data)}
@@ -28,7 +28,7 @@ router.post('/influencer',function(req,res){
     var password=req.body.password;
     var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
 
-    Influencer.find(query,function(err,data){
+    Influencer.findOne(query,function(err,data){
         if(err){console.log(err)}
         else {console.log(data)
             res.send(data)}

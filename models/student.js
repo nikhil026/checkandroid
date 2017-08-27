@@ -1,4 +1,5 @@
 var mongoose=require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
 
 var studentSchema = mongoose.Schema({
     first_name:String,
@@ -25,5 +26,5 @@ var studentSchema = mongoose.Schema({
 
 
 });
-
+studentSchema.plugin(findOrCreate);
 module.exports=mongoose.model('Student', studentSchema,'Students');
