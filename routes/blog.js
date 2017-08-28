@@ -7,7 +7,7 @@ var Influencer=require('./../models/influencer');
 var Student=require('./../models/student');
 
 
-router.post('/', function(req, res, next) {
+router.post('/influencer', function(req, res, next) {
 
     var blogId=new mongoose.mongo.ObjectId();
     // var bloggerId="599f0513357a1d899b9bde0d";
@@ -28,17 +28,25 @@ router.post('/', function(req, res, next) {
     });
 
  Influencer.findOne(
-        {_id:req.body.id},function(err,user){
+        {email:req.body.email,password:req.body.password},function(err,user){
             if(err){console.log(err)}
             if(user){return user;}
         }).then(function(data){
             data.blogs.push(blogId)
         data.save();
      res.send(data);
-     });
+         });
 
 
 
+});
+
+
+router.get('/student',function(req,res,next){
+   Blog.find(function(err,result){
+       if(err){return err;}
+       if(result){res.send(result)}
+   })
 });
 
 module.exports = router;
