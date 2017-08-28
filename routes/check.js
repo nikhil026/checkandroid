@@ -14,8 +14,8 @@ router.get('/student', function(req, res, next) {
 
 router.post('/student',function(req,res) {
     console.log(req.body);
-    // var CLIENT_ID = "587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
-    var CLIENT_ID = "170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com";
+    var CLIENT_ID = "587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
+    // var CLIENT_ID = "170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com";
     var token = req.body.token;
     var client = new auth.OAuth2(CLIENT_ID, '', '');
     client.verifyIdToken(
@@ -24,6 +24,7 @@ router.post('/student',function(req,res) {
         function (e, login) {
             var payload = login.getPayload();
             var userid = payload['sub'];
+            if(e){res.send(e)}
             console.log(JSON.stringify(payload, undefined, 2));
             Student.find({"email": payload.email}, function (err, data) {
                 if (err) {
@@ -42,7 +43,8 @@ router.post('/student',function(req,res) {
 });
 
     router.post('/influencer',function(req,res){
-        var CLIENT_ID="587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
+        var CLIENT_ID = "587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
+        // var CLIENT_ID = "170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com";
         var token=req.body.token;
         var client = new auth.OAuth2(CLIENT_ID, '', '');
         client.verifyIdToken(
@@ -66,7 +68,8 @@ router.post('/student',function(req,res) {
                     }
                 });
 
-            });})
+            });
+    })
 
 
 

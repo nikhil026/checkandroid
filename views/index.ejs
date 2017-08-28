@@ -9,6 +9,7 @@
           gapi.load('auth2', function() {
               auth2 = gapi.auth2.init({
                   client_id: '170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com'
+//                  client_id:'587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com'
               });
           });
       }
@@ -18,43 +19,14 @@
 <button id="signinStudentButton">Student Signup with Google</button>
 <button id="signinInfluencerButton">Influencer Signup with Google</button>
 <script>
-    $('#signinStudentButton').click(function() {
-        auth2.grantOfflineAccess().then(studentSignInCallback);
-    });
-    $('#signinInfluencerButton').click(function() {
-        auth2.grantOfflineAccess().then(influencerSignInCallback);
-    });
-    function studentsignInCallback(authResult) {
+    var  studentSignInCallback=function(authResult) {
         if (authResult['code']) {
 
             $('#signinButton').attr('style', 'display: none');
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3000/student/check',
-
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                contentType: 'application/octet-stream; charset=utf-8',
-                success: function(result) {
-                },
-                processData: false,
-                data: authResult['code']
-            });
-        } else {
-
-        }
-    }
-    function influencerSignInCallback(authResult) {
-        if (authResult['code']) {
-
-            $('#signininfluencerbutton').attr('style', 'display: none');
-
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:3000/check/influencer',
-
+                url: 'http://localhost:3000/check/student',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 },
@@ -69,6 +41,36 @@
 
         }
     }
+    var influencerSignInCallback=function(authResult) {
+        if (authResult['code']) {
+
+            $('#signininfluencerbutton').attr('style', 'display: none');
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/check/influencer',
+
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                  contentType: 'application/octet-stream; charset=utf-8',
+                success: function(result) {
+
+                },
+                processData: false,
+                data: authResult['code']
+            });
+        } else {
+
+        }
+    }
+    $('#signinStudentButton').click(function() {
+        auth2.grantOfflineAccess().then(studentSignInCallback);
+    });
+    $('#signinInfluencerButton').click(function() {
+        auth2.grantOfflineAccess().then(influencerSignInCallback);
+    });
+
 </script>
 </body>
 </html>
