@@ -8,9 +8,9 @@ var Student=require('./../models/student');
 
 
 router.post('/', function(req, res, next) {
-    res.send('Hello I am Server ! Your request has been received .');
+
     var blogId=new mongoose.mongo.ObjectId();
-    var bloggerId="599f0513357a1d899b9bde0d";
+    // var bloggerId="599f0513357a1d899b9bde0d";
     // var bloggerId=Student.findOne({"email":"nikhil051097@gmail.com"},'_id',function(err,user){
     //     if(err){console.log(err);}
     //     if(user){return user;}
@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
         _id:blogId,
         title:req.body.title,
         content:req.body.content,
-        blogger_id:bloggerId
+        blogger_id:req.body.id
     };
     var blog = new Blog(obj);
     blog.save(function (err, results) {
@@ -28,12 +28,15 @@ router.post('/', function(req, res, next) {
     });
 
  Influencer.findOne(
-        {_id:bloggerId},function(err,user){
+        {_id:req.body.id},function(err,user){
             if(err){console.log(err)}
             if(user){return user;}
         }).then(function(data){
             data.blogs.push(blogId)
-        data.save();});
+        data.save();
+     res.send(data);
+     });
+
 
 
 });
