@@ -9,7 +9,7 @@ var influencerSchema = mongoose.Schema({
     type:String,
     expertise:String,
     tags:[{field:String}],
-    scholarship:[{scholarship_id:mongoose.Schema.Types.ObjectId}],
+    scholarship:[{}],
     blogs:[{}],
     courses:[{course:mongoose.Schema.Types.ObjectId}]
 

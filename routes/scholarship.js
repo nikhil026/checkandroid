@@ -6,7 +6,7 @@ var Scholarship=require('./../models/scholarship');
 
 router.post('/influencer',function(req,res){
     var scholarshipId=new mongoose.mongo.ObjectId();
-res.send(req.body)
+  res.send(req.body)
   var obj={
       _id:scholarshipId,
       posterId:req.body.posterId,
@@ -20,22 +20,43 @@ res.send(req.body)
       website:req.body.website
   };
 
-    // console.log(scholarshipId);
+    console.log(scholarshipId);
     var scholarship = new Scholarship(obj);
 
-    scholarship.save(function (err, results) {
-        console.log(results);
-    });
-    Influencer.findById(scholarshipId,function(err,user){
-        if(err){console.log(err)}
-        if(user){console.log(user)}
-    }).then((data)=>{data.scholarships.push(scholarshipId);})
+    scholarship.save(function (err, user) {
+       if(err){return err;}
+       if(user){return user;}
 
+    });
+    Influencer.findOne(
+        {email:req.body.email,password:req.body.password},
+        function(err,user){
+            if(err){console.log(err)}
+            if(user){return user;}
+        }).then(function(data){
+        data.scholarship.push(scholarshipId);
+        data.save();
+        res.send(data);
+    });
 });
 
-router.get('/student',function(req,res){
+router.get('/influencer',function(req,res,next){
+    if(req.body.id){
+        Scholarship.find({posterId:req.body.id},function(err,result){
+            if(err){return err;}
+            if(result){res.send(result)}
+        })}
+    else{
+       Scholarship.find(function(err,result){
+            if(err){return err;}
+            if(result){res.send(result);}});}
+});
 
-    res.send('hello');
+router.get('/student',function(req,res,next){
+    Scholarship.find(function(err,result){
+        if(err){return err;}
+        if(result){res.send(result)}
+    })
 });
 
 

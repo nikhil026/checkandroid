@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 
 var scholarshipSchema = mongoose.Schema({
-    influencerId:mongoose.Schema.Types.ObjectId,
+    posterId:mongoose.Schema.Types.ObjectId,
     title:String,
     overview:String,
     eligiblity:String,
