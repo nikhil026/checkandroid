@@ -1,6 +1,7 @@
 var mongoose=require('mongoose');
 
 var scholarshipSchema = mongoose.Schema({
+    influencerId:mongoose.Schema.Types.ObjectId,
     title:String,
     overview:String,
     eligiblity:String,
@@ -13,8 +14,7 @@ var scholarshipSchema = mongoose.Schema({
     ],
     deadline:{type:Date,default:Date.now },
     contact:String,
-    website:String,
-    influencer_id:mongoose.Schema.Types.ObjectId
+    website:String
 });
 
 module.exports=mongoose.model('Scholarship', scholarshipSchema,'Scholarships');

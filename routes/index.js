@@ -1,10 +1,55 @@
 var express = require('express');
 var router = express.Router();
-
+var Student=require('./../models/student');
+var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
   console.log(req.body);
  res.render('index.ejs');
 });
+
+
+router.post('/student/signin',function(req,res){
+    Student.findOne({email:req.body.email},function(err,user){
+        if(err){res.send('Wrong email');}
+        if(user){return user;}
+    }).then((data)=>{
+    if(!data){
+        Student.create({"email":req.body.email},function(err,user){
+            if(err){console.log(err);}
+            if(user){console.log(user);}
+            res.redirect('/student/profile');
+        });
+    }
+    else if(data){
+        console.log(data)
+        res.redirect('/student/profile');
+    }});
+});
+router.post('/influencer/signin',function(req,res){
+    console.log('received');
+    console.log(req.body.email)
+    Influencer.findOne({email:req.body.email},function(err,user){
+        if(err){res.send('Wrong email');}
+        if(user){return user}
+    }).then((data)=>{
+        console.log(data)
+    if(!data){
+        Influencer.create({"email":req.body.email},function(err,user){
+            if(err){console.log(err);}
+            if(user){console.log(user);}
+            res.render('influencer-profile',{profile:user});
+        })
+    }
+    else if(data){
+       console.log(data)
+        res.render('influencer-profile',{profile:user});
+    }});
+});
+router.get('/student/profile',function(req,res){
+    res.render('student-profile')
+});
+
+
 
 module.exports = router;

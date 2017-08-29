@@ -28,7 +28,8 @@ router.post('/influencer', function(req, res, next) {
     });
 
  Influencer.findOne(
-        {email:req.body.email,password:req.body.password},function(err,user){
+        {email:req.body.email,password:req.body.password},
+     function(err,user){
             if(err){console.log(err)}
             if(user){return user;}
         }).then(function(data){

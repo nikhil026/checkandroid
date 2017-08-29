@@ -1,75 +1,99 @@
+<!--<!doctype html>-->
+<!--<html>-->
+<!--<head>-->
+  <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+  <!--<meta name="google-signin-client_id" content="170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com">-->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <!--<style> body{background:url("http://localhost:3000/images/background.png") no-repeat}</style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+  <!--<div class="col-lg-4 col-lg-offset-3">-->
+    <!--<div class="g-signin2" data-onsuccess="onSignIn">Student SiginIn</div>-->
+    <!--<button class="btn btn-primary" href="" onclick="signOut()">Sign out</button>-->
+    <!--<div class="g-signin2" data-onsuccess="onSignIn">influencer SignIn</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+<!--<script>-->
+    <!--function onSignIn(googleUser) {-->
+        <!--var profile = googleUser.getBasicProfile();-->
+<!--//        var xhttp = new XMLHttpRequest();-->
+<!--//        xhttp.open("POST", "http://localhost:3000/student/signin", true);-->
+<!--//        xhttp.setRequestHeader("Content-type", "application/json");-->
+         <!--data=JSON.stringify({email:profile.getEmail()});-->
+<!--//        xhttp.send(JSON.stringify(data));-->
+        <!--$.ajax({-->
+            <!--type: 'POST',-->
+            <!--url: 'http://localhost:3000/student/signin',-->
+            <!--data: data,-->
+            <!--success: function(){-->
+                <!--location = '/student/profile'; //this is the redirect-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+
+      <!--function signOut() {-->
+          <!--var auth2 = gapi.auth2.getAuthInstance();-->
+          <!--auth2.signOut().then(function () {-->
+              <!--console.log('User signed out.');-->
+          <!--});-->
+      <!--}-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!doctype html>
 <html>
 <head>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
-  </script>
-  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
-  </script>
-  <script>
-      function start() {
-          gapi.load('auth2', function() {
-              auth2 = gapi.auth2.init({
-                  client_id: '170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com'
-//                  client_id:'587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com'
-              });
-          });
-      }
-  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style> body{background:url("http://localhost:3000/images/background.png") no-repeat}</style>
 </head>
 <body>
-<button id="signinStudentButton">Student Signup with Google</button>
-<button id="signinInfluencerButton">Influencer Signup with Google</button>
+<div class="col-lg-4 col-lg-offset-5" style="padding-left:80px;padding-top:100px;margin-top:150px;background-color:white;height:400px;width:300px">
+  <div>Student SignIn</div>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <a href="#" onclick="signOut();">Sign out</a>
+  <div>Influencer SignIn</div>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <a href="#" onclick="signOut();">Sign out</a>
+</div>
+
+<div id="signupform" style="display:none">login</div>
 <script>
-    var  studentSignInCallback=function(authResult) {
-        if (authResult['code']) {
-
-            $('#signinButton').attr('style', 'display: none');
-
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:3000/check/student',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                contentType: 'application/octet-stream; charset=utf-8',
-                success: function(result) {
-                    console.log(result);
-                },
-                processData: false,
-                data: authResult['code']
-            });
-        } else {
-
-        }
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:3000/check/student');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            console.log('Signed in as: ' + xhr.responseText);
+            if(xhr.responseText=='true'){
+                $("#signupform").css("display","block");
+            }
+        };
+        var id_token = googleUser.getAuthResponse().id_token;
+        xhr.send('token=' + id_token);
     }
-    var influencerSignInCallback=function(authResult) {
-        if (authResult['code']) {
 
-            $('#signininfluencerbutton').attr('style', 'display: none');
-
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:3000/check/influencer',
-
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                  contentType: 'application/octet-stream; charset=utf-8',
-                success: function(result) {
-
-                },
-                processData: false,
-                data: authResult['code']
-            });
-        } else {
-
-        }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
     }
-    $('#signinStudentButton').click(function() {
-        auth2.grantOfflineAccess().then(studentSignInCallback);
-    });
-    $('#signinInfluencerButton').click(function() {
-        auth2.grantOfflineAccess().then(influencerSignInCallback);
-    });
+
+
 
 </script>
 </body>
