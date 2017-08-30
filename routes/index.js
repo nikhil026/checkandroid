@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Student=require('./../models/student');
 var Influencer=require('./../models/influencer');
+var Image=require('./../models/images');
 var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
@@ -50,6 +51,58 @@ router.get('/', function(req, res, next) {
 // router.get('/student/profile',function(req,res){
 //     res.render('student-profile')
 // });
+
+function rawBody(req, res, next) {
+    var chunks = [];
+
+    req.on('data', function(chunk) {
+        chunks.push(chunk);
+    });
+
+    req.on('end', function() {
+        var buffer = Buffer.concat(chunks);
+
+        req.bodyLength = buffer.length;
+        req.rawBody = buffer;
+        next();
+    });
+
+    req.on('error', function (err) {
+        console.log(err);
+        res.status(500);
+    });
+}
+
+router.post('/student/upload-image/:id', rawBody, function (req, res) {
+
+    if (req.rawBody && req.bodyLength > 0) {
+
+        var body = req.rawBody,
+            base64Data = body.replace(/^data:image\/png;base64,/,""),
+            binaryData = new Buffer(base64Data, 'base64').toString('binary');
+        require("fs").writeFile("out.png", binaryData, "binary", function(err) {
+            console.log(err); // writes out file without error, but it's not a valid image
+        });
+
+        res.send(req.rawBody);
+    } else {
+        res.send(500);
+    }});
+
+router.post('/influencer/upload-image/:id', rawBody, function (req, res) {
+
+    if (req.rawBody && req.bodyLength > 0) {
+
+        // TODO save image (req.rawBody) somewhere
+
+        // send some content as JSON
+        res.send(req.rawBody);
+    } else {
+        res.send(500);
+    }});
+
+
+
 
 router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
