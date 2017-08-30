@@ -43,7 +43,6 @@ router.post('/student',function(req,res) {
         }
         );
 });
-
 router.post('/influencer',function(req,res){
         var CLIENT_ID = "587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
         // var CLIENT_ID = "170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com";
@@ -71,7 +70,7 @@ router.post('/influencer',function(req,res){
                 });
 
             });
-    })
+    });
 
 
 

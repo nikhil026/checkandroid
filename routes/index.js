@@ -80,8 +80,8 @@ router.post('/student/edit/profile',function(req,res){
         }).then(function(data){
         data=req.body;
         console.log(data)
-        data.save(function(err,user){
-            console.log(user)
+        data.save(function(err){
+            console.log(err)
         });
     });
 });
@@ -89,14 +89,17 @@ router.post('/student/edit/profile',function(req,res){
 router.post('/influencer/edit/profile',function(req,res){
     var id=req.body._id;
      console.log(id);
-      Influencer.findById(id,
-        function(err,user)
-        {   if(err){return err;}
-            if(user){return user;}
+      Influencer.findById(id, function(err,user)
+        {   if(err){
+            return err;}
+            if(user){
+            return user;}
         }).then(function(data){
-            data=req.body;
-            console.log(data)
-           data.save();
+           data.first_name=req.body.first_name;
+           data.last_name=req.body.last_name;
+           data.save(function(err,user){
+               console.log(err)
+           });
         });
 });
 
