@@ -19,12 +19,13 @@ router.post('/student',function(req,res) {
     var token = req.body.token;
     var client = new auth.OAuth2(CLIENT_ID, '', '');
     client.verifyIdToken(
-        token,
-        CLIENT_ID,
-        function (e, login) {
+        token, CLIENT_ID,
+        function(e,login) {
+            if(e){res.send(e);}
+            if(!login){console.log('problem')
+            return ;}
             var payload = login.getPayload();
             var userid = payload['sub'];
-            if(e){res.send(e)}
             console.log(JSON.stringify(payload, undefined, 2));
             Student.find({"email": payload.email}, function (err, data) {
                 if (err) {
@@ -39,10 +40,11 @@ router.post('/student',function(req,res) {
                 }
             });
 
-        });
+        }
+        );
 });
 
-    router.post('/influencer',function(req,res){
+router.post('/influencer',function(req,res){
         var CLIENT_ID = "587018207580-o4r1iq6nj80d5tcg7sr94t0i3nasu7v7.apps.googleusercontent.com";
         // var CLIENT_ID = "170921491735-isss7i6seuvhghgdl6k047lulioppo9a.apps.googleusercontent.com";
         var token=req.body.token;
@@ -50,7 +52,7 @@ router.post('/student',function(req,res) {
         client.verifyIdToken(
             token,
             CLIENT_ID,
-            function(e, login) {
+            function(e,login) {
                 var payload = login.getPayload();
                 var userid = payload['sub'];
                 console.log(JSON.stringify(payload, undefined, 2));
