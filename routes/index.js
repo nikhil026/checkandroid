@@ -71,24 +71,57 @@ router.post('/student/profile',function(req,res){
 
 
 router.post('/student/edit/profile',function(req,res){
-    Student.findById(id,function(err,user)
+   console.log(req.body);
+    var id=req.body._id;
+    console.log(id)
+    Student.findById(id,
+        function(err,user)
     {
         if(err){return err;}
         if(user){return user;}
     }).then(
         function(data){
-        data=req.body;
-        data.save(function(err,user)
-        {
-          if(err){ return err;}
-          if(user){return user;}
-    })
+            data.first_name=req.body.first_name;
+        data.last_name=req.body.last_name;
+        data.following=req.body.following;
+        data.achievements = req.body.achievements;
+        data.docs=req.body.docs;
+        data.education=req.body.education;
+        data.education.aadhar_no=req.body.aadhar_no;
+        data.save(function(err,user){
+           if(err){ return err;}
+           if(user){return user;}
+        });
     });
-    // student.save(function(err,user){
-    //     if(err){console.log(err);}
-    //     if(user){console.log(user);}
-    // })
-})
+});
+
+router.post('/influencer/edit/profile',function(req,res){
+    console.log(req.body);
+    var id=req.body._id;
+    console.log(id)
+    Student.findById(id,
+        function(err,user)
+        {
+            if(err){return err;}
+            if(user){return user;}
+        }).then(function(data){
+            // data.first_name=req.body.first_name;
+            // data.last_name=req.body.last_name;
+            // data.following=req.body.following;
+            // data.achievements = req.body.achievements;
+            // data.docs=req.body.docs;
+            // data.education=req.body.education;
+            // data.education.aadhar_no=req.body.aadhar_no;
+            data.first_name='ravi';
+            console.log(data.first_name)
+            data.save(function(err,user){
+                if(err){ return err;}
+                if(user){return user;}
+            });
+        });
+});
+
+
 
 
 
