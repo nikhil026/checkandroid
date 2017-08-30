@@ -25,7 +25,7 @@ router.post('/influencer', function(req, res, next) {
              if(err){console.log(err)}
             if(user){return user;}
         }).then(function(data){
-            data.blogs.push(blogId)
+            data.blogs.push(blogId);
         data.save();
      res.send(data);
          });
