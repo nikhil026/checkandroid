@@ -31,17 +31,21 @@ router.post('/influencer', function(req, res, next) {
          });
 });
 
+router.get('/influencer/:id',function(req,res,next){
+    console.log(req.params.id)
+    Blog.find({posterId:req.params.id},function(err,result){
+        if(err){return err;}
+        if(result){res.send(result)}
+    });
+
+});
+
 router.get('/influencer',function(req,res,next){
-   if(req.body.id){
-       Blog.find({blogger_id:req.body.id},function(err,result){
-           if(err){return err;}
-           if(result){res.send(result)}
-       })}
-       else{
-       Blog.find(function(err,result){
-           if(err){return err;}
-           if(result){res.send(result);}});}
-   });
+    Blog.find(function(err,result){
+        if(err){return err;}
+        if(result){res.send(result)}
+    })
+});
 
 router.get('/student',function(req,res,next){
     Blog.find(function(err,result){

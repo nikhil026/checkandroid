@@ -22,7 +22,15 @@ router.post('/influencer',function(req,res){
 
     console.log(scholarshipId);
     var scholarship = new Scholarship(obj);
+    Influencer.findById(req.body.posterId,function(err,user){
+        if(err){return err}
+        if(user){user.scholarship.push(scholarshipId);
+        user.save(function(e,success){
+            if(e){return e;}
+            if(success){return success}
 
+        })}
+    })
     scholarship.save(function (err, user) {
        if(err){return err;}
        if(user){return user;}
@@ -40,16 +48,13 @@ router.post('/influencer',function(req,res){
     });
 });
 
-router.get('/influencer',function(req,res,next){
-    if(req.body.id){
-        Scholarship.find({posterId:req.body.id},function(err,result){
+router.get('/influencer/:id',function(req,res,next){
+    console.log(req.params.id)
+    Scholarship.find({posterId:req.params.id},function(err,result){
             if(err){return err;}
             if(result){res.send(result)}
-        })}
-    else{
-       Scholarship.find(function(err,result){
-            if(err){return err;}
-            if(result){res.send(result);}});}
+        });
+
 });
 
 router.get('/student',function(req,res,next){

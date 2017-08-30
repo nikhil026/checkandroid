@@ -6,11 +6,12 @@ var influencerSchema = mongoose.Schema({
     last_name:String,
     email:String,
     password:String,
+    dob:{type:Date},
     type:String,
     expertise:String,
     tags:[{type:String}],
-    scholarship:[{}],
-    blogs:[{}],
+    scholarship:[{type:String}],
+    blogs:[{type:String}],
     courses:[{course:mongoose.Schema.Types.ObjectId}]
 
 });

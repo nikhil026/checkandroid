@@ -51,18 +51,18 @@ router.get('/', function(req, res, next) {
 //     res.render('student-profile')
 // });
 
-router.post('/influencer/profile',function(req,res){
+router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
-  Influencer.findOne({_id:req.body.id},function(err,user){
+  Influencer.findOne({_id:req.params.id},function(err,user){
       if(err){res.send(err);}
       if(user){res.send(user);}
   });
 console.log('hello')
 });
 
-router.post('/student/profile',function(req,res){
-    console.log(req.body.id)
-    Student.findOne({_id:req.body.id},function(err,user){
+router.post('/student/profile/:id',function(req,res){
+    console.log(req.params.id)
+    Student.findOne({_id:req.params.id},function(err,user){
         if(err){res.send(err);}
         if(user){res.send(user);}
     });

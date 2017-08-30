@@ -14,14 +14,16 @@ var studentSchema = mongoose.Schema({
             final_year:String
         }
     ],
-    aadhar_no:String,
+    gender:String,
+    dob:{type:Date},
+    aadhar:String,
     aadhar_boolean:String,
-    docs:[{docs_id:mongoose.Schema.Types.ObjectId }],
+    docs:[String],
     achievements:[{
        name:String,
       description:String
     }],
-    following:[{following_id:mongoose.Schema.Types.ObjectId}]
+    following:[String]
 
 
 
