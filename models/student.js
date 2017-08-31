@@ -23,7 +23,8 @@ var studentSchema = mongoose.Schema({
        name:String,
       description:String
     }],
-    following:[String]
+    following:[String],
+    profilePic:String
 
 
 

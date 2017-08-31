@@ -6,12 +6,7 @@ var scholarshipSchema = mongoose.Schema({
     overview:String,
     eligiblity:String,
     how_to_apply:String,
-    faq:[
-        {
-            question:{type:String,default:"How can i get this scholarship"},
-            answer:{type:String,default:"Apply through our portal"}
-        }
-    ],
+    faq:[{type:String}],
     deadline:{type:Date,default:Date.now },
     contact:String,
     website:String

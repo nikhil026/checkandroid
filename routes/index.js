@@ -3,6 +3,7 @@ var router = express.Router();
 var Student=require('./../models/student');
 var Influencer=require('./../models/influencer');
 var Image=require('./../models/images');
+var Doc=require('./../models/docs');
 var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
@@ -52,57 +53,94 @@ router.get('/', function(req, res, next) {
 //     res.render('student-profile')
 // });
 
-function rawBody(req, res, next) {
-    var chunks = [];
 
-    req.on('data', function(chunk) {
-        chunks.push(chunk);
+router.post('/student/upload-image',function(req,res){
+    var picId=new mongoose.mongo.ObjectId();
+    console.log(picId)
+    var image=new Image({
+        _id:picId,
+        profile_image:req.body.profile_image,
+        uploader_id:req.body.uploader_id
+    });
+    image.save(function(err,success){
+        if(err){return err;}
+        if(success){
+            Student.findById(req.body.uploader_id,function(err,user){
+                if(err){return err;}
+                if(user){user.profilePic=picId;
+                      user.save(function(e,s){
+                          if(e){return e;}
+                          if(s){return s;}
+                      })}
+            })
+        }
+    });
+});
+
+router.post('/influencer/upload-image',function(req,res){
+    var picId=new mongoose.mongo.ObjectId();
+    console.log(picId)
+    var image=new Image({
+        _id:picId,
+        profile_image:req.body.profile_image,
+        uploader_id:req.body.uploader_id
+    });
+    image.save(function(err,success){
+        if(err){return err;}
+        if(success){
+            Influencer.findById(req.body.uploader_id,function(err,user){
+                if(err){return err;}
+                if(user){user.profilePic=picId;
+                    user.save(function(e,s){
+                        if(e){return e;}
+                        if(s){return s;}
+                    })}
+            })
+        }
     });
 
-    req.on('end', function() {
-        var buffer = Buffer.concat(chunks);
+});
 
-        req.bodyLength = buffer.length;
-        req.rawBody = buffer;
-        next();
+router.post('/student/doc-upload',function(req,res){
+    var docId=new mongoose.mongo.ObjectId();
+    var docs=new Doc({
+        _id:docId,
+        uploader_id:req.body.id,
+        docs_image:req.body.doc,
+        type:req.body.type
+
+});
+
+    docs.save(function(e,s){
+        if(e){
+            res.send(e);
+            return e;
+        }
+        if(s){
+            Student.findById(req.body.id,function(err,user){
+                if(err){
+                    res.send(err);
+                    return err;}
+                if(user){
+                    user.docs.push(docId);
+                    user.save(function(err,user){
+                        if(err){return err;}
+                        if(user) {return user};
+                    })
+                }
+            })
+        }
     });
+});
 
-    req.on('error', function (err) {
-        console.log(err);
-        res.status(500);
+router.get('/image/:profilepic',function(req,res){
+    console.log(req.params.profilepic);
+    Image.find({_id:req.params.profilepic},function(err,user){
+        if(err){ return err;}
+        if(user){
+        res.send(user);}
     });
-}
-
-router.post('/student/upload-image/:id', rawBody, function (req, res) {
-
-    if (req.rawBody && req.bodyLength > 0) {
-
-        var body = req.rawBody,
-            base64Data = body.replace(/^data:image\/png;base64,/,""),
-            binaryData = new Buffer(base64Data, 'base64').toString('binary');
-        require("fs").writeFile("out.png", binaryData, "binary", function(err) {
-            console.log(err); // writes out file without error, but it's not a valid image
-        });
-
-        res.send(req.rawBody);
-    } else {
-        res.send(500);
-    }});
-
-router.post('/influencer/upload-image/:id', rawBody, function (req, res) {
-
-    if (req.rawBody && req.bodyLength > 0) {
-
-        // TODO save image (req.rawBody) somewhere
-
-        // send some content as JSON
-        res.send(req.rawBody);
-    } else {
-        res.send(500);
-    }});
-
-
-
+});
 
 router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
@@ -121,7 +159,6 @@ router.post('/student/profile/:id',function(req,res){
     });
     console.log('hello')
 });
-
 
 router.post('/student/edit/profile',function(req,res){
     var id=req.body._id;

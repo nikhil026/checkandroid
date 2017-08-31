@@ -32,8 +32,8 @@ router.post('/influencer', function(req, res, next) {
 });
 
 router.get('/influencer/:id',function(req,res,next){
-    console.log(req.params.id)
-    Blog.find({posterId:req.params.id},function(err,result){
+       console.log(req.params.id)
+     Blog.find({posterId:req.params.id},function(err,result){
         if(err){return err;}
         if(result){res.send(result)}
     });

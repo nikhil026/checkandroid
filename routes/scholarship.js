@@ -17,7 +17,8 @@ router.post('/influencer',function(req,res){
       eligiblity:req.body.overview,
       how_to_apply:req.body.how_to_apply,
       contact:req.body.contact,
-      website:req.body.website
+      website:req.body.website,
+      faq:req.body.faq
   };
 
     console.log(scholarshipId);

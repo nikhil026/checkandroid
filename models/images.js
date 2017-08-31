@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 
 var imageSchema = mongoose.Schema({
-    profile_image:{data:Buffer,contentType:String},
+    profile_image:String,
     uploader_id:mongoose.Schema.Types.ObjectId
 });
 
