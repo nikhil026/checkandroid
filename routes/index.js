@@ -141,7 +141,6 @@ router.get('/image/:profilepic',function(req,res){
         res.send(user);}
     });
 });
-
 router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
   Influencer.findOne({_id:req.params.id},function(err,user){
@@ -150,7 +149,6 @@ console.log(req.body.id)
   });
 console.log('hello')
 });
-
 router.post('/student/profile/:id',function(req,res){
     console.log(req.params.id)
     Student.findOne({_id:req.params.id},function(err,user){
@@ -159,7 +157,6 @@ router.post('/student/profile/:id',function(req,res){
     });
     console.log('hello')
 });
-
 router.post('/student/edit/profile',function(req,res){
     var id=req.body._id;
     console.log(id);
@@ -175,7 +172,6 @@ router.post('/student/edit/profile',function(req,res){
         });
     });
 });
-
 router.post('/influencer/edit/profile',function(req,res){
     var id=req.body._id;
      console.log(id);
@@ -192,9 +188,5 @@ router.post('/influencer/edit/profile',function(req,res){
            });
         });
 });
-
-
-
-
 
 module.exports = router;

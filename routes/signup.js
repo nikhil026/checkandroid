@@ -23,10 +23,11 @@ router.post('/student',function(req,res) {
             user.last_name=req.body.last_name;
             user.dob=req.body.dob;
             user.gender=req.body.gender;
-            user.aadhar=req.body.aadhar;
             user.save(function(e,success){
                 if(e){return e;}
-                if(success){return success;}
+                if(success){
+                    res.send(success)
+                    return success;}
             });
         }});
     });
