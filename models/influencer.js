@@ -13,7 +13,8 @@ var influencerSchema = mongoose.Schema({
     scholarship:[{type:String}],
     blogs:[{type:String}],
     courses:[{course:mongoose.Schema.Types.ObjectId}],
-    profilePic:String
+    profilePic:String,
+    followers:[{type:String}]
 
 });
 

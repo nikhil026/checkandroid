@@ -5,7 +5,9 @@ var blogSchema = mongoose.Schema({
     title:String,
     content:String,
     blogger_id:mongoose.Schema.Types.ObjectId,
-    date:{type:Date,default:Date.now}
+    date:{type:Date,default:Date.now},
+    likers:[{type:String}],
+    likesNo:[{type:Number,default:0}]
 });
 
 module.exports=mongoose.model('Blog', blogSchema,'Blogs');

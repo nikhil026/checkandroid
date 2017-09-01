@@ -23,9 +23,12 @@ var studentSchema = mongoose.Schema({
        name:String,
       description:String
     }],
-    following:[String],
+    following:[{type:String}],
     profilePic:String,
-    appliedFor:[{type:String}]
+    appliedFor:[{type:String}],
+    myLikes:[{type:String}]
+
+
 
 
 

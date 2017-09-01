@@ -6,12 +6,11 @@ var Scholarship=require('./../models/scholarship');
 
 router.post('/influencer',function(req,res){
     var scholarshipId=new mongoose.mongo.ObjectId();
-  res.send(req.body)
+    console.log(req.body.password);
   var obj={
       _id:scholarshipId,
       posterId:req.body.posterId,
       email:req.body.email,
-      password:req.body.password,
       title:req.body.title,
       overview:req.body.overview,
       eligiblity:req.body.overview,
@@ -21,32 +20,30 @@ router.post('/influencer',function(req,res){
       faq:req.body.faq
   };
 
-    console.log(scholarshipId);
     var scholarship = new Scholarship(obj);
     Influencer.findById(req.body.posterId,function(err,user){
-        if(err){return err}
+        if(err){
+            return err;}
         if(user){user.scholarship.push(scholarshipId);
         user.save(function(e,success){
             if(e){return e;}
-            if(success){return success}
-
+            if(success){res.send(success);}
         })}
-    })
-    scholarship.save(function (err, user) {
+    });
+    scholarship.save(function (err, scholarship) {
        if(err){return err;}
-       if(user){return user;}
-
+       if(scholarship){return scholarship;}
     });
-    Influencer.findOne(
-        {email:req.body.email,password:req.body.password},
-        function(err,user){
-            if(err){console.log(err)}
-            if(user){return user;}
-        }).then(function(data){
-        data.scholarship.push(scholarshipId);
-        data.save();
-        res.send(data);
-    });
+    // Influencer.findOne(
+    //     {email:req.body.email,password:req.body.password},
+    //     function(err,user){
+    //         if(err){console.log(err)}
+    //         if(user){return user;}
+    //     }).then(function(data){
+    //     data.scholarship.push(scholarshipId);
+    //     data.save(function());
+    //     res.send(data);
+    // });
 });
 
 router.get('/influencer/:id',function(req,res,next){

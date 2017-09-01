@@ -5,6 +5,7 @@ var Influencer=require('./../models/influencer');
 var Image=require('./../models/images');
 var Scholarship=require('./../models/scholarship');
 var Doc=require('./../models/docs');
+var Blog=require('./../models/blog');
 var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
@@ -137,7 +138,66 @@ router.post('/student/doc-upload',function(req,res){
 });
 
 
-router.post('/blog/:blogid/like/:likerid');
+router.post('/blog/:blogid/like/:likerid',function(req,res){
+    console.log(req.params.likerid);
+    console.log(req.params.blogid)
+    Blog.findById(req.params.blogid,function(err,blog){
+        if(err){return err;}
+        if(blog){
+            blog.likers.push(req.params.likerid);
+            blog.likesNo=Number(blog.likesNo)+1;
+            blog.save(function(err,liked){
+            if(err){return e;}
+            if(liked){
+                Student.findById(req.params.likerid,function(err,data){
+                    if(err){return err;}
+                    if(data){data.myLikes.push(req.params.blogid);
+                    data.save(function(err,done){
+                        if(err){return err;}
+                        if(done){res.send(done);}
+                    })
+                    }
+                });
+            }
+        });
+        }
+    })
+});
+router.post('/follow/:studentid/:influencerid',function(req,res) {
+    console.log(req.params.studentid);
+    console.log(req.params.influencerid);
+    Influencer.findById(req.params.influencerid, function (err, success) {
+        if (err) {
+            return err;
+        }
+        if(success) {
+            success.followers.push(req.params.studentid);
+            success.save(function (err, followed) {
+                if (err) {
+                    return e;
+                }
+                if (followed) {
+                    Student.findById(req.params.studentid, function (err, data) {
+                        if (err) {
+                            return err;
+                        }
+                        if (data) {
+                            data.following.push(req.params.influencerid);
+                            data.save(function (err, done) {
+                                if (err) {
+                                    return err;
+                                }
+                                if (done) {
+                                    res.send(done);
+                                }
+                            })
+                        }
+                    })
+                }
+            });
+        }
+    });
+});
 router.post('/scholarship/apply',function(req,res,next){
    studentId=req.body.studentId;
    scholarshipId=req.body.scholarshipId;
