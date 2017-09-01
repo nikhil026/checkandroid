@@ -31,7 +31,7 @@ router.post('/influencer',function(req,res){
     Influencer.findOne(query,function(err,data){
         if(err){console.log(err)}
         else {console.log(data)
-            res.send(data)}
+            res.send(data);}
     });
 });
 

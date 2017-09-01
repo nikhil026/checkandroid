@@ -3,6 +3,7 @@ var router = express.Router();
 var Student=require('./../models/student');
 var Influencer=require('./../models/influencer');
 var Image=require('./../models/images');
+var Scholarship=require('./../models/scholarship');
 var Doc=require('./../models/docs');
 var mongoose=require('mongoose');
 
@@ -56,7 +57,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/student/upload-image',function(req,res){
     var picId=new mongoose.mongo.ObjectId();
-    console.log(picId)
+    console.log(picId);
     var image=new Image({
         _id:picId,
         profile_image:req.body.profile_image,
@@ -67,10 +68,12 @@ router.post('/student/upload-image',function(req,res){
         if(success){
             Student.findById(req.body.uploader_id,function(err,user){
                 if(err){return err;}
-                if(user){user.profilePic=picId;
+                if(user){
+                      user.profilePic=picId;
                       user.save(function(e,s){
                           if(e){return e;}
-                          if(s){return s;}
+                          if(s){
+                          res.send(s);}
                       })}
             })
         }
@@ -133,6 +136,33 @@ router.post('/student/doc-upload',function(req,res){
     });
 });
 
+
+router.post('/blog/:blogid/like/:likerid');
+router.post('/scholarship/apply',function(req,res,next){
+   studentId=req.body.studentId;
+   scholarshipId=req.body.scholarshipId;
+   Scholarship.findById(scholarshipId,function(err,data){
+       if(err){return err;}
+       if(data){
+           data.appliedBy.push(studentId);
+           data.save(function(err,success){
+             if(err){return err;}
+             if(success){Student.findById(studentId,function(err,data){
+                 if(err){return err;}
+                 if(data){
+                     data.appliedFor.push(scholarshipId);
+                     data.save(function(err,success){
+                         if(err){return err;}
+                         if(success){res.send(success);}
+                     })
+                 }
+
+             })}
+           })
+       }
+   });
+
+});
 router.get('/image/:profilepic',function(req,res){
     console.log(req.params.profilepic);
     Image.find({_id:req.params.profilepic},function(err,user){

@@ -9,7 +9,8 @@ var scholarshipSchema = mongoose.Schema({
     faq:[{type:String}],
     deadline:{type:Date,default:Date.now },
     contact:String,
-    website:String
+    website:String,
+    appliedBy:[{type:String}]
 });
 
 module.exports=mongoose.model('Scholarship', scholarshipSchema,'Scholarships');
