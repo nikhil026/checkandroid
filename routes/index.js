@@ -72,9 +72,7 @@ router.post('/student/upload-image',function(req,res){
                 if(user){
                       user.profilePic=picId;
                       user.save(function(e,s){
-                          if(e){return e;}
-                          if(s){
-                          res.send(s);}
+                          res.send(s);
                       })}
             })
         }
@@ -96,8 +94,7 @@ router.post('/influencer/upload-image',function(req,res){
                 if(err){return err;}
                 if(user){user.profilePic=picId;
                     user.save(function(e,s){
-                        if(e){return e;}
-                        if(s){return s;}
+                        res.send(s);
                     })}
             })
         }
@@ -250,33 +247,43 @@ router.post('/student/profile/:id',function(req,res){
 router.post('/student/edit/profile',function(req,res){
     var id=req.body._id;
     console.log(id);
-   Student.findById(id,
+    Student.findById(id,
         function(err,user)
         {   if(err){return err;}
             if(user){return user;}
         }).then(function(data){
-        data=req.body;
-        console.log(data)
-        data.save(function(err){
-            console.log(err)
+        data.first_name=req.body.first_name;
+        data.last_name=req.body.last_name;
+        data.tags=req.body.tags;
+        data.courses=req.body.courses;
+        data.dob=req.body.dob;
+        // console.log(data)
+        data.save(function(err,saved){
+            res.send(saved);
         });
+
     });
 });
+
 router.post('/influencer/edit/profile',function(req,res){
     var id=req.body._id;
-     console.log(id);
-      Influencer.findById(id, function(err,user)
-        {   if(err){
-            return err;}
-            if(user){
-            return user;}
+    console.log(id);
+    Influencer.findById(id,
+        function(err,user)
+        {   if(err){return err;}
+            if(user){return user;}
         }).then(function(data){
-           data.first_name=req.body.first_name;
-           data.last_name=req.body.last_name;
-           data.save(function(err,user){
-               console.log(err)
-           });
+        data.first_name=req.body.first_name;
+        data.last_name=req.body.last_name;
+        data.tags=req.body.tags;
+        data.courses=req.body.courses;
+        data.dob=req.body.dob;
+        // console.log(data)
+        data.save(function(err,saved){
+           res.send(saved);
         });
+
+    });
 });
 
 module.exports = router;
