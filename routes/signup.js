@@ -26,7 +26,7 @@ router.post('/student',function(req,res) {
             user.save(function(e,success){
                 if(e){return e;}
                 if(success){
-                    res.send(success)
+                    res.send(success);
                     return success;}
             });
         }});

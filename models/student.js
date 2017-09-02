@@ -15,7 +15,7 @@ var studentSchema = mongoose.Schema({
         }
     ],
     gender:String,
-    dob:{type:Date},
+    dob:{type:String},
     aadhar:String,
     aadhar_boolean:String,
     docs:[String],
