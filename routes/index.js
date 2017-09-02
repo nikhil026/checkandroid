@@ -65,17 +65,17 @@ router.post('/student/upload-image',function(req,res){
         uploader_id:req.body.uploader_id
     });
     image.save(function(err,success){
-        if(err){return err;}
-        if(success){
+
             Student.findById(req.body.uploader_id,function(err,user){
                 if(err){return err;}
                 if(user){
                       user.profilePic=picId;
                       user.save(function(e,s){
                           res.send(s);
-                      })}
-            })
-        }
+                      });}
+            });
+            res.send('done');
+
     });
 });
 
@@ -88,16 +88,16 @@ router.post('/influencer/upload-image',function(req,res){
         uploader_id:req.body.uploader_id
     });
     image.save(function(err,success){
-        if(err){return err;}
-        if(success){
-            Influencer.findById(req.body.uploader_id,function(err,user){
+        Influencer.findById(req.body.uploader_id,function(err,user){
                 if(err){return err;}
-                if(user){user.profilePic=picId;
+                if(user){
+                    user.profilePic=picId;
                     user.save(function(e,s){
                         res.send(s);
-                    })}
-            })
-        }
+                    });}
+            });
+        res.send('done')
+
     });
 
 });
