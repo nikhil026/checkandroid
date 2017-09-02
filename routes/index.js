@@ -65,23 +65,23 @@ router.post('/student/upload-image',function(req,res){
         uploader_id:req.body.uploader_id
     });
     image.save(function(err,success){
-
-            Student.findById(req.body.uploader_id,function(err,user){
+          Student.findById(req.body.uploader_id,function(err,user){
                 if(err){return err;}
                 if(user){
                       user.profilePic=picId;
                       user.save(function(e,s){
                           res.send(s);
-                      });}
+                      });
+                }
             });
-            res.send('done');
+            res.send('true')
 
     });
 });
 
 router.post('/influencer/upload-image',function(req,res){
     var picId=new mongoose.mongo.ObjectId();
-    console.log(picId)
+    console.log(picId);
     var image=new Image({
         _id:picId,
         profile_image:req.body.profile_image,
@@ -89,19 +89,18 @@ router.post('/influencer/upload-image',function(req,res){
     });
     image.save(function(err,success){
         Influencer.findById(req.body.uploader_id,function(err,user){
-                if(err){return err;}
-                if(user){
-                    user.profilePic=picId;
-                    user.save(function(e,s){
-                        res.send(s);
-                    });}
-            });
-        res.send('done')
+            if(err){return err;}
+            if(user){
+                user.profilePic=picId;
+                user.save(function(e,s){
+                    res.send(s);
+                });
+            }
+        });
+        res.send('true')
 
     });
-
 });
-
 router.post('/student/doc-upload',function(req,res){
     var docId=new mongoose.mongo.ObjectId();
     var docs=new Doc({
