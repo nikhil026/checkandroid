@@ -74,7 +74,7 @@ router.post('/student/upload-image',function(req,res){
                       });
                 }
             });
-            res.send('true')
+          
 
     });
 });
@@ -88,7 +88,7 @@ router.post('/influencer/upload-image',function(req,res){
         uploader_id:req.body.uploader_id
     });
     image.save(function(err,success){
-        Influencer.findById(req.body.uploader_id,function(err,user){
+            Influencer.findById(req.body.uploader_id,function(err,user){
             if(err){return err;}
             if(user){
                 user.profilePic=picId;
