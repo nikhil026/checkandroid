@@ -231,8 +231,8 @@ router.get('/image/:profilepic',function(req,res){
 router.get('/image/student/:id/direct',function(req,res){
     req.params.id;
     Student.findById(req.params.id,function(err,success){
-        if(err){return err;}
-        if(success){return success;}
+
+    return success;
     }).then(function(image){var
         studentImage=success.profilePic;
         Image.findById(studentImage,function(err,user){
@@ -240,11 +240,12 @@ router.get('/image/student/:id/direct',function(req,res){
         })
     });
 });
+
 router.get('/image/influencer/:id/direct',function(req,res){
     req.params.id;
     Influencer.findById(req.params.id,function(err,success){
-        if(err){return err;}
-        if(success){return success;}
+
+      return success;
     }).then(function(image){var
         studentImage=success.profilePic;
         Image.findById(studentImage,function(err,user){
@@ -252,6 +253,11 @@ router.get('/image/influencer/:id/direct',function(req,res){
         })
     });
 });
+
+router.get('/image/:imageid/direct',function(req,res){
+
+})
+
 router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
   Influencer.findOne({_id:req.params.id},function(err,user){
