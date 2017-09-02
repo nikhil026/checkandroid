@@ -74,7 +74,7 @@ router.post('/student/upload-image',function(req,res){
                       });
                 }
             });
-          
+
 
     });
 });
@@ -97,7 +97,7 @@ router.post('/influencer/upload-image',function(req,res){
                 });
             }
         });
-        res.send('true')
+     
 
     });
 });
