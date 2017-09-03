@@ -10,8 +10,7 @@ var studentSchema = mongoose.Schema({
         {
             institute:String,
             type:String,
-            start_year:String,
-            final_year:String
+            tenure:String
         }
     ],
     gender:String,

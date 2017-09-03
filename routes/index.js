@@ -6,6 +6,7 @@ var Image=require('./../models/images');
 var Scholarship=require('./../models/scholarship');
 var Doc=require('./../models/docs');
 var Blog=require('./../models/blog');
+var sgMail = require('@sendgrid/mail');
 var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
@@ -284,14 +285,14 @@ router.post('/student/edit/profile',function(req,res){
         }).then(function(data){
         data.first_name=req.body.first_name;
         data.last_name=req.body.last_name;
-        data.tags=req.body.tags;
+        data.education=req.body.education;
         data.courses=req.body.courses;
         data.dob=req.body.dob;
+
         // console.log(data)
         data.save(function(err,saved){
             res.send(saved);
         });
-
     });
 });
 
@@ -313,6 +314,28 @@ router.post('/influencer/edit/profile',function(req,res){
            res.send(saved);
         });
 
+    });
+});
+// router.post('/sendemail',function(){
+//     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//     const msg = {
+//         to: 'nikhil051097@example.com',
+//         from: 'test@example.com',
+//         subject: 'Sending with SendGrid is Fun',
+//         text: 'and easy to do anywhere, even with Node.js',
+//         html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+//     };
+//     sgMail.send(msg);
+// });
+router.get('/forgot/password/:id',function(req,res){
+    console.log(req.params.id);
+    Student.findById(req.params.id,function(err,user){
+       if(err){console.log(err);}
+       if(user){user.email;}
+    });
+    Influencer.findById(req.params.id,function(err,user){
+        if(err){console.log(err);}
+        if(user){return user;}
     });
 });
 
