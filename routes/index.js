@@ -6,7 +6,7 @@ var Image=require('./../models/images');
 var Scholarship=require('./../models/scholarship');
 var Doc=require('./../models/docs');
 var Blog=require('./../models/blog');
-var sgMail = require('@sendgrid/mail');
+// var sgMail = require('@sendgrid/mail');
 var mongoose=require('mongoose');
 
 router.get('/', function(req, res, next) {
