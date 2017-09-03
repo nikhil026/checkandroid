@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f517a31-f552-4ac4-9172-e2caf6f394a7" name="Default" comment="co" />
+    <list default="true" id="3f517a31-f552-4ac4-9172-e2caf6f394a7" name="Default" comment="co">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,12 +19,12 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="42" />
+            <state relative-caret-position="405">
+              <caret line="291" column="18" lean-forward="false" selection-start-line="291" selection-start-column="18" selection-end-line="291" selection-end-column="18" />
               <folding>
                 <element signature="e#505#556#0" expanded="false" />
-                <element signature="e#7920#8098#0" expanded="false" />
-                <element signature="e#8153#8346#0" expanded="false" />
+                <element signature="e#7921#8099#0" expanded="false" />
+                <element signature="e#8154#8347#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,8 +53,8 @@
       <file leaf-file-name="signup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/signup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+            <state relative-caret-position="455">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -82,14 +84,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bodyP</find>
-      <find>var</find>
       <find>auth</find>
       <find>getPay</find>
       <find>Auth</find>
       <find>scholar</find>
       <find>stude</find>
-      <find>student</find>
       <find>studentSi</find>
       <find>check</find>
       <find>studentsign</find>
@@ -112,6 +111,9 @@
       <find>blog</find>
       <find>student/</find>
       <find>email</find>
+      <find>student/signup</find>
+      <find>student</find>
+      <find>router.post</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -284,12 +286,12 @@
       <workItem from="1504267617289" duration="10338000" />
       <workItem from="1504284867550" duration="698000" />
       <workItem from="1504333788051" duration="13195000" />
-      <workItem from="1504405030855" duration="11812000" />
+      <workItem from="1504405030855" duration="12276000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205043000" />
+    <option name="totallyTimeSpent" value="205507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
@@ -555,14 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
@@ -579,14 +573,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/signup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="42" />
+        <state relative-caret-position="405">
+          <caret line="291" column="18" lean-forward="false" selection-start-line="291" selection-start-column="18" selection-end-line="291" selection-end-column="18" />
           <folding>
             <element signature="e#505#556#0" expanded="false" />
-            <element signature="e#7920#8098#0" expanded="false" />
-            <element signature="e#8153#8346#0" expanded="false" />
+            <element signature="e#7921#8099#0" expanded="false" />
+            <element signature="e#8154#8347#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -257,7 +257,7 @@ router.get('/image/influencer/:id/direct',function(req,res){
 
 router.get('/image/:imageid/direct',function(req,res){
 
-})
+});
 
 router.post('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
@@ -285,8 +285,11 @@ router.post('/student/edit/profile',function(req,res){
         }).then(function(data){
         data.first_name=req.body.first_name;
         data.last_name=req.body.last_name;
-        data.education=req.body.education;
-        data.courses=req.body.courses;
+        for(var i=0;i<data.education.length;i++){
+            data.education[i]=req.body.education[i];
+        }
+        // data.education=req.body.education;
+        // data.courses=req.body.courses;
         data.dob=req.body.dob;
 
         // console.log(data)
