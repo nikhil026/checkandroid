@@ -277,23 +277,34 @@ router.post('/student/profile/:id',function(req,res){
 });
 router.post('/student/edit/profile',function(req,res){
     var id=req.body._id;
-    console.log(id);
+    // console.log(req.body._id);
     Student.findById(id,
         function(err,user)
         {   if(err){return err;}
             if(user){return user;}
         }).then(function(data){
+            // console.log(data.education);
         data.first_name=req.body.first_name;
         data.last_name=req.body.last_name;
-        for(var i=0;i<data.education.length;i++){
-            data.education[i]=req.body.education[i];
-        }
-        // data.education=req.body.education;
-        // data.courses=req.body.courses;
         data.dob=req.body.dob;
+
+    // data.education.institute=req.body.education.institute,
+    // data.education.tenure=req.body.education.tenure,
+    // data.education.type=req.body.education.type
+
+console.log(req.body.education.length);
+        for(var i=0;i<=data.education.length;i++){
+                data.education[i].institute=req.body.education.institute,
+                data.education[i].tenure=req.body.education.tenure,
+                data.education[i].type=req.body.education.type
+        }
+        console.log(req.body.education);
+        // data.education.push(object);
+        // data.courses=req.body.courses;
 
         // console.log(data)
         data.save(function(err,saved){
+            console.log('data');
             res.send(saved);
         });
     });
