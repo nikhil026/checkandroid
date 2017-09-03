@@ -9,7 +9,7 @@ var studentSchema = mongoose.Schema({
     education:[
         {
             institute:String,
-            type:String,
+            level:String,
             tenure:String
         }
     ],

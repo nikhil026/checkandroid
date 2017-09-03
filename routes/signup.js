@@ -18,11 +18,11 @@ router.post('/student',function(req,res) {
         function(err,user){
         if(err){return err;}
         if(user){
-            user.password=req.body.password;
-            user.first_name=req.body.first_name;
-            user.last_name=req.body.last_name;
-            user.dob=req.body.dob;
-            user.gender=req.body.gender;
+                user.password=req.body.password;
+                user.first_name=req.body.first_name;
+                user.last_name=req.body.last_name;
+                user.dob=req.body.dob;
+                user.gender=req.body.gender;
             user.save(function(e,success){
                 if(e){return e;}
                 if(success){
