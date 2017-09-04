@@ -5,6 +5,7 @@ var blogSchema = mongoose.Schema({
     title:String,
     content:String,
     blogger_id:mongoose.Schema.Types.ObjectId,
+    blogger_name:String,
     date:{type:Date,default:Date.now},
     likers:[{type:String}],
     likesNo:[{type:Number,default:0}]

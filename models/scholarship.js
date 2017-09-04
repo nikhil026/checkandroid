@@ -2,6 +2,7 @@ var mongoose=require('mongoose');
 
 var scholarshipSchema = mongoose.Schema({
     posterId:mongoose.Schema.Types.ObjectId,
+    posterName:String,
     title:String,
     overview:String,
     eligiblity:String,

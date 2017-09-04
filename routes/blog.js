@@ -12,13 +12,13 @@ router.post('/influencer', function(req, res, next) {
         _id:blogId,
         title:req.body.title,
         content:req.body.content,
-        blogger_id:req.body.id
+        blogger_id:req.body.id,
+        blogger_name:req.body.blogger_name
     };
     var blog = new Blog(obj);
     blog.save(function (err, results) {
         console.log(results);
     });
-
     Influencer.findOne(
         {email:req.body.email,password:req.body.password},
      function(err,user){
@@ -26,7 +26,7 @@ router.post('/influencer', function(req, res, next) {
             if(user){return user;}
         }).then(function(data){
             data.blogs.push(blogId);
-        data.save();
+            data.save();
      res.send(data);
          });
 });
