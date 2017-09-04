@@ -9,6 +9,35 @@ var auth = new GoogleAuth;
 var mongoose=require('mongoose');
 var connection=mongoose.connect('mongodb://localhost/loginsystem');
 var app = express();
+const nodemailer=require('nodemailer');
+// const sendmail = require('sendmail')({
+//     logger: {
+//         debug: console.log,
+//         info: console.info,
+//         warn: console.warn,
+//         error: console.error
+//     },
+//     silent: false,
+//     dkim: { // Default: False
+//         privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+//         keySelector: 'mydomainkey'
+//     },
+//     devPort: 1025 // Default: False
+//     devHost: 'localhost' // Default: localhost
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
