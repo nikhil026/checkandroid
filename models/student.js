@@ -18,10 +18,7 @@ var studentSchema = mongoose.Schema({
     aadhar:String,
     aadhar_boolean:String,
     docs:[String],
-    achievements:[{
-       name:String,
-      description:String
-    }],
+    achievements:[String],
     following:[{type:String}],
     profilePic:String,
     appliedFor:[{type:String}],
