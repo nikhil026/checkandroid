@@ -9,7 +9,7 @@ var auth = new GoogleAuth;
 var mongoose=require('mongoose');
 var connection=mongoose.connect('mongodb://localhost/loginsystem');
 var app = express();
-const nodemailer=require('nodemailer');
+// const nodemailer=require('nodemailer');
 // const sendmail = require('sendmail')({
 //     logger: {
 //         debug: console.log,
