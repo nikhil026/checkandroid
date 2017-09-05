@@ -9,7 +9,7 @@ var Student=require('./../models/student');
 var Influencer=require('./../models/influencer');
 
 router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+    res.send('respond with   a resource');
 });
 
 router.post('/student',function(req,res) {
@@ -29,7 +29,8 @@ router.post('/student',function(req,res) {
                     res.send(success);
                     return success;}
             });
-        }});
+        }
+        });
     });
 
 router.post('/influencer',function(req,res) {

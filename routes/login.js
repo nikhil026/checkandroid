@@ -15,21 +15,52 @@ router.get('/', function(req, res, next) {
 router.post('/student',function(req,res){
    var email=req.body.email;
    var password=req.body.password;
-    var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
+    // var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
+    //
+    // Student.findOne(query,function(err,data){
+    //     if(!data){res.send('not present');}
+    //     if(data){res.send(data);}
+    //
+    // });
+    Student.findOne({email:req.body.email},function(err,data){
+        if(data){
+            if(data.password!=req.body.password){
+                res.send('PW');
+            }
+            else{
 
-    Student.findOne(query,function(err,data){
-        res.send(data);
-
-    });
+                res.send(data);
+            }
+        }
+        if(!data){
+            res.send('NP');
+        }
+    })
         });
 router.post('/influencer',function(req,res){
     var email=req.body.email;
     var password=req.body.password;
-    var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
+    // var query = {$and:[{email:{$regex: req.body.email, $options: 'i'}},{password:{$regex: req.body.password, $options: 'i'}}]}
 
-    Influencer.findOne(query,function(err,data){
-        res.send(data);
-    });
+    // Influencer.findOne(query,function(err,data){
+    //     if(!data){res.send('Incorrect Credentials');}
+    //     if(data){res.send(data);}
+    //     if(err){res.send('error')}
+    // });
+    Influencer.findOne({email:req.body.email},function(err,data){
+        if(data){
+            if(data.password!=req.body.password){
+                res.send('PW');
+            }
+            else{
+
+                res.send(data);
+            }
+        }
+        if(!data){
+            res.send('NP');
+        }
+    })
 });
 
 

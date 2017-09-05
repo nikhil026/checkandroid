@@ -3,7 +3,7 @@ var findOrCreate = require('mongoose-findorcreate');
 
 var studentSchema = mongoose.Schema({
     first_name:String,
-    second_name:String,
+    last_name:String,
     email:String,
     password:String,
     education:[
