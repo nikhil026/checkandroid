@@ -6,6 +6,7 @@ var Image=require('./../models/images');
 var Scholarship=require('./../models/scholarship');
 var Doc=require('./../models/docs');
 var Blog=require('./../models/blog');
+var Form=require('./../models/forms');
 // var sgMail = require('@sendgrid/mail');
 var mongoose=require('mongoose');
 
@@ -347,4 +348,24 @@ router.get('/forgot/password/:id',function(req,res){
     });
 });
 
+router.post('/form-data/contact',function(req,res){
+   var form =new Form({'first_name':req.body.first_name,
+               'last_name':req.body.last_name,
+               'email':req.body.email,
+              'suggestion':req.body.suggestion  });
+   form.save(function(err,saved){
+       console.log(saved);
+       res.redirect('http://edumonk.org/contact.html');
+   })
+});
+router.post('/form-data/give-edumonk',function(req,res){
+    var form =new Form({'first_name':req.body.first_name,
+        'last_name':req.body.last_name,
+        'email':req.body.email,
+        'suggestion':req.body.suggestion  });
+    form.save(function(err,saved){
+        console.log(saved);
+        res.redirect('http://edumonk.org/give-edumonk.html');
+    })
+});
 module.exports = router;
