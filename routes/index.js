@@ -261,7 +261,7 @@ router.get('/image/:imageid/direct',function(req,res){
 
 });
 
-router.post('/influencer/profile/:id',function(req,res){
+router.get('/influencer/profile/:id',function(req,res){
 console.log(req.body.id)
   Influencer.findOne({_id:req.params.id},function(err,user){
       if(err){res.send(err);}
@@ -269,7 +269,7 @@ console.log(req.body.id)
   });
 console.log('hello')
 });
-router.post('/student/profile/:id',function(req,res){
+router.get('/student/profile/:id',function(req,res){
     console.log(req.params.id)
     Student.findOne({_id:req.params.id},function(err,user){
         if(err){res.send(err);}
