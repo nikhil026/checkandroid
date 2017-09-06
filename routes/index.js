@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   console.log(req.body);
  res.render('index.ejs');
 });
+// router.get('/form-data',function(req))
 
 
 // router.post('/student/signin',function(req,res){
