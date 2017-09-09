@@ -3,7 +3,7 @@ var mongoose=require('mongoose');
 var router = express.Router();
 var Influencer=require('./../models/influencer');
 var Scholarship=require('./../models/scholarship');
-
+var Student=require('./../models/student');
 router.post('/influencer',function(req,res){
     var scholarshipId=new mongoose.mongo.ObjectId();
     console.log(req.body.password);
@@ -14,7 +14,7 @@ router.post('/influencer',function(req,res){
       title:req.body.title,
       poster_name:req.body.poster_name,
       overview:req.body.overview,
-      eligiblity:req.body.overview,
+      eligiblity:req.body.eligibility,
       how_to_apply:req.body.how_to_apply,
       contact:req.body.contact,
       website:req.body.website,
@@ -62,6 +62,19 @@ router.get('/student',function(req,res,next){
         if(result){res.send(result)}
     })
 });
+router.get('/student/applied/:id',function(req,res){
+Student.findById(req.params.id,function(err,user){
+  var array=user.appliedFor;
+  var scholarshipArray=[];
+for(var x=0;x<array.length;x++){
+Scholarship.findById(array[x],function(err,user){
+scholarshipArray.push(user);
+});
 
+}
+  console.log(scholarshipArray);
+  res.send(scholarshipArray);
+})
+});
 
 module.exports=router;

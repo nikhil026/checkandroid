@@ -18,6 +18,7 @@ router.post('/student',function(req,res) {
         function(err,user){
         if(err){return err;}
         if(user){
+                user.email=req.body.email;
                 user.password=req.body.password;
                 user.first_name=req.body.first_name;
                 user.last_name=req.body.last_name;
@@ -30,27 +31,35 @@ router.post('/student',function(req,res) {
                     return success;}
             });
         }
+
         });
     });
 
-router.post('/influencer',function(req,res) {
-
-
-    Influencer.findOrCreate(
-        {"email":req.body.email,
-        "password":req.body.password,
-        "first_name":req.body.first_name,
-        "last_name":req.body.last_name,
-        "DOB":req.body.dob,
-        "gender":req.body.gender},
-        function(err,user){
+    router.post('/influencer',function(req,res) {
+        Influencer.findOrCreate(
+            {"email":req.body.email},
+            function(err,user){
             if(err){return err;}
-            if(user){res.send(user);}
-        }
-    );
+            // if(user){
+            //   res.send('user existing');
+            // }
+            if(user){
+                    user.email=req.body.email;
+                    user.password=req.body.password;
+                    user.first_name=req.body.first_name;
+                    user.last_name=req.body.last_name;
+                    user.dob=req.body.dob;
+                    user.gender=req.body.gender;
+                user.save(function(e,success){
+                    if(e){return e;}
+                    if(success){
+                        res.send(success);
+                    }
+                });
+            }
 
-});
-
+            });
+        });
 
     //dummy email check nikhil051097@gmail.com
 

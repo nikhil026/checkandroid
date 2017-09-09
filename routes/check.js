@@ -77,10 +77,4 @@ router.post('/influencer',function(req,res){
             });
     });
 
-
-
-
-
-
-
 module.exports = router;

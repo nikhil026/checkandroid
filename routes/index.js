@@ -222,6 +222,7 @@ router.post('/scholarship/apply',function(req,res,next){
    });
 
 });
+
 router.get('/image/:profilepic',function(req,res){
     console.log(req.params.profilepic);
     Image.find({_id:req.params.profilepic},function(err,user){
