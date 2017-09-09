@@ -14,7 +14,7 @@ router.post('/influencer',function(req,res){
       title:req.body.title,
       poster_name:req.body.poster_name,
       overview:req.body.overview,
-      eligiblity:req.body.eligibility,
+      eligiblity:req.body.eligiblity,
       how_to_apply:req.body.how_to_apply,
       contact:req.body.contact,
       website:req.body.website,
