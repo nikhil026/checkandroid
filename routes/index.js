@@ -354,7 +354,8 @@ router.post('/form-data/contact',function(req,res){
    var form =new Form({'first_name':req.body.first_name,
                'last_name':req.body.last_name,
                'email':req.body.email,
-              'suggestion':req.body.suggestion  });
+              'suggestion':req.body.suggestion ,
+              'contact':req.body.contact });
    form.save(function(err,saved){
        console.log(saved);
        res.redirect('http://edumonk.org/contact.html');
@@ -364,7 +365,8 @@ router.post('/form-data/give-edumonk',function(req,res){
     var form =new Form({'first_name':req.body.first_name,
         'last_name':req.body.last_name,
         'email':req.body.email,
-        'suggestion':req.body.suggestion  });
+        'suggestion':req.body.suggestion,
+        'contact':req.body.contact  });
     form.save(function(err,saved){
         console.log(saved);
         res.redirect('http://edumonk.org/give-edumonk.html');
@@ -376,7 +378,8 @@ router.post('/form-data/programs-teach',function(req,res){
     var form =new Form({'first_name':req.body.first_name,
         'last_name':req.body.last_name,
         'email':req.body.email,
-        'suggestion':req.body.suggestion  });
+        'suggestion':req.body.suggestion,
+        'contact':req.body.contact  });
     form.save(function(err,saved){
         console.log(saved);
         res.redirect('http://edumonk.org/programs-teach-for-good.html');
@@ -386,7 +389,8 @@ router.post('/form-data/programs-campaign',function(req,res){
     var form =new Form({'first_name':req.body.first_name,
         'last_name':req.body.last_name,
         'email':req.body.email,
-        'suggestion':req.body.suggestion  });
+        'suggestion':req.body.suggestion ,
+        'contact':req.body.contact });
     form.save(function(err,saved){
         console.log(saved);
         res.redirect('http://edumonk.org/programs-campaign-for-good.html');
@@ -396,7 +400,9 @@ router.post('/form-data/programs-tech',function(req,res){
     var form =new Form({'first_name':req.body.first_name,
         'last_name':req.body.last_name,
         'email':req.body.email,
-        'suggestion':req.body.suggestion  });
+        'suggestion':req.body.suggestion ,
+        'contact':req.body.contact
+    });
     form.save(function(err,saved){
         console.log(saved);
         res.redirect('http://edumonk.org/programs-tech-for-good.html');
