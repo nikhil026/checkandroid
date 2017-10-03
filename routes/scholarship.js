@@ -28,13 +28,16 @@ router.post('/influencer',function(req,res){
         if(user){user.scholarship.push(scholarshipId);
         user.save(function(e,success){
             if(e){return e;}
-            if(success){res.send(success);}
+            if(success){
+                scholarship.save(function (err, scholarship) {
+                    if(err){return err;}
+                    if(scholarship){return scholarship;}
+                });
+
+                return res.send(success);}
         })}
     });
-    scholarship.save(function (err, scholarship) {
-       if(err){return err;}
-       if(scholarship){return scholarship;}
-    });
+
     // Influencer.findOne(
     //     {email:req.body.email,password:req.body.password},
     //     function(err,user){
