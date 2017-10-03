@@ -31,7 +31,9 @@ router.post('/influencer',function(req,res){
             if(success){
                 scholarship.save(function (err, scholarship) {
                     if(err){return err;}
-                    if(scholarship){return scholarship;}
+                    if(scholarship){
+                        console.log(scholarship);
+                        return scholarship;}
                 });
 
                 return res.send(success);}
